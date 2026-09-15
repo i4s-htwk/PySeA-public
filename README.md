@@ -28,8 +28,8 @@ Alle Befehle werden im Terminal (Windows: PowerShell) ausgeführt.
 
 |  | Schritt | Windows (PowerShell)                              | macOS / Linux                                     |
 | - | --- |---------------------------------------------------|---------------------------------------------------|
-| 1 | Repository klonen | `git clone https://github.com/i4s-htwk/PySeA.git` | `git clone https://github.com/i4s-htwk/PySeA.git` |
-| 2 | Projektordner öffnen | `cd PySeA`                                        | `cd PySeA`                                        |
+| 1 | Repository klonen | `git clone https://github.com/i4s-htwk/PySeA-public.git` | `git clone https://github.com/i4s-htwk/PySeA-public.git` |
+| 2 | Projektordner öffnen | `cd PySeA-public`                                | `cd PySeA-public`                                |
 | 3 | Virtuelle Umgebung erstellen | `py -3.12 -m venv .venv`                          | `python3.12 -m venv .venv`                        |
 | 4 | Virtuelle Umgebung aktivieren | `.\.venv\Scripts\Activate.ps1`                    | `source .venv/bin/activate`                       |
 | 5 | pip aktualisieren | `python -m pip install --upgrade pip`             | `python -m pip install --upgrade pip`             |

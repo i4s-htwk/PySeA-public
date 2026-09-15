@@ -25,10 +25,10 @@ Führen Sie diese Schritte aus, um PySeA in Ihrer IDE (z. B. **PyCharm**, **VS C
 
 #### 1️⃣ Repository klonen
 cd /Pfad/zu/Ihrem/Arbeitsordner
-git clone https://github.com/i4s-htwk/PySeA.git
+git clone https://github.com/i4s-htwk/PySeA-public.git
 
 #### 2️⃣ Abhängigkeiten installieren
-`cd PySeA`
+`cd PySeA-public`
 
 ##### Virtuelle Umgebung erstellen und aktivieren (empfohlen, um Konflikte zu vermeiden)
 `python -m venv venv`
