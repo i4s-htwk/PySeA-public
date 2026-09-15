@@ -60,7 +60,6 @@ excel_responses.page = "Ergebnisse" # Verwendetes Blatt in der Excel-Datei angeb
 excel_responses.add_response("B5") # Antwort 1, gespeichert als excel_responses.responses[0]
 excel_responses.add_response("B6") # Antwort 2, gespeichert als excel_responses.responses[1]
 
-response_1 = task_1.response(excel_responses.responses[0]) # Erste Antwortlücke der Aufgabe 1
 
 # Aufgabenkörper
 task_1.item_body(
@@ -70,9 +69,7 @@ task_1.item_body(
     "$$C = " + str(excel_variablen.variables[2]) + "$$ \n" +
     "Lösen Sie die folgenden Aufgaben:\n" +
     "$$(A + B) \\cdot C = $$" + str(excel_responses.responses[0]) + "\n" +
-    "$$A + B \\cdot C = $$" + str(excel_responses.responses[1]) + "\n" +
-    "{EXCEL_VARIABLE_1_1} \n" +
-    response_1
+    "$$A + B \\cdot C = $$" + str(excel_responses.responses[1]) + "\n"
 )
 
 ###############################
