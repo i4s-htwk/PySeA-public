@@ -1,0 +1,475 @@
+{
+    "store_configurations": {
+        "test_title": "Script Test 2",
+        "path_excel_files": [],
+        "path_export": "",
+        "answer_acc": {
+            "selection": "relative",
+            "relative": 2,
+            "absolute": 0.1
+        },
+        "point_deduction": {
+            "is_used": false,
+            "point_deduction_per_attempt": 0.5,
+            "min_score_percentage": 40
+        },
+        "point_distribution": {
+            "gap": "1",
+            "selection": "2",
+            "matching": "2"
+        },
+        "advanced_settings": {
+            "navigation_mode": "nonlinear",
+            "keep_responses": true
+        },
+        "feedback": {
+            "feedback_correct": {
+                "id": "FEEDBACK_CORRECT",
+                "value": "",
+                "type": "feedback_correct",
+                "condition": {
+                    "kind": "none",
+                    "value": null
+                }
+            },
+            "feedback_incorrect": {
+                "id": "FEEDBACK_INCORRECT",
+                "value": "",
+                "type": "feedback_incorrect",
+                "condition": {
+                    "kind": "none",
+                    "value": null
+                }
+            }
+        },
+        "pass_score_percentage": 40
+    },
+    "store_feedback": {
+        "task11": {
+            "feedback_incorrect": [
+                {
+                    "id": "FEEDBACK_INCORRECT_1",
+                    "value": "Lücke 1 ist falsch",
+                    "type": "incorrect",
+                    "condition": {
+                        "kind": "response",
+                        "value": {
+                            "id": "RESPONSE_1",
+                            "value": "1",
+                            "points": null
+                        }
+                    }
+                }
+            ],
+            "feedback_correct": {
+                "id": "FEEDBACK_CORRECT",
+                "value": "",
+                "type": "correct",
+                "condition": {
+                    "kind": "none",
+                    "value": null
+                }
+            }
+        },
+        "task22": {
+            "feedback_incorrect": [
+                {
+                    "id": "FEEDBACK_INCORRECT_1",
+                    "value": "das war falsch, hier ist die richtige Antwort: \n{BILD_1}",
+                    "type": "incorrect",
+                    "condition": {
+                        "kind": "none",
+                        "value": null
+                    }
+                }
+            ],
+            "feedback_correct": {
+                "id": "FEEDBACK_CORRECT",
+                "value": "das war richtig ",
+                "type": "correct",
+                "condition": {
+                    "kind": "none",
+                    "value": null
+                }
+            }
+        }
+    },
+    "store_images": {
+        "path_images": "tests/integration_test_data/input_dir/media_script2",
+        "images": [
+            {
+                "href": "schnittkraft1.png",
+                "id": "BILD_1",
+                "width": "422",
+                "height": "324",
+                "ratio": "0.7677725118483413"
+            },
+            {
+                "href": "schnittkraft3.png",
+                "id": "BILD_2",
+                "width": "407",
+                "height": "329",
+                "ratio": "0.8083538083538083"
+            },
+            {
+                "href": "schnittkraft2.png",
+                "id": "BILD_3",
+                "width": "403",
+                "height": "319",
+                "ratio": "0.7915632754342432"
+            },
+            {
+                "href": "test_idTest1fdcb466-c2be-4694-b87f-76987a0a1ec4_medium_17983961710511144037.png",
+                "id": "BILD_4",
+                "width": "217",
+                "height": "50",
+                "ratio": "0.2304147465437788"
+            },
+            {
+                "href": "lastbild.png",
+                "id": "BILD_5",
+                "width": "492",
+                "height": "418",
+                "ratio": "0.8495934959349594"
+            }
+        ]
+    },
+    "store_item_body": {
+        "section1": "",
+        "task11": "Hallo hier ist eine Lücke: {RESPONSE_1}\nund hier ein neuer Absatz",
+        "task12": "Ordnen Sie den Bildern die richtigen Begriffe zu: \n{MATCHING}",
+        "section2": "",
+        "task21": "Wie groß ist die Schnittkraft im angegebenen System? \n{BILD_5}\nAntwort: {RESPONSE_1}",
+        "task22": "Wählen sie den richtigen Schnittkraftverlauf aus: \n{SELECTION}",
+        "task23": "Füllen Sie die Lücken in der Tabelle aus: \n{TABELLE_0_1}",
+        "task24": "Ordnen Sie den Bildern die richtigen Begriffe zu: \n{MATCHING}"
+    },
+    "store_responses": {
+        "task11": {
+            "excel_responses": null,
+            "responses": [
+                {
+                    "id": "RESPONSE_1",
+                    "value": "1",
+                    "points": null
+                }
+            ]
+        },
+        "task12": {
+            "excel_responses": null,
+            "responses": []
+        },
+        "task21": {
+            "excel_responses": null,
+            "responses": [
+                {
+                    "id": "RESPONSE_1",
+                    "value": "12",
+                    "points": null
+                }
+            ]
+        },
+        "task22": {
+            "excel_responses": null,
+            "responses": []
+        },
+        "task23": {
+            "excel_responses": null,
+            "responses": []
+        },
+        "task24": {
+            "excel_responses": null,
+            "responses": []
+        }
+    },
+    "store_selections": {
+        "items": {
+            "task22": {
+                "id": "SELECTION",
+                "type": "singleChoice",
+                "correct": [
+                    "BILD_1"
+                ],
+                "incorrect": [
+                    "BILD_3",
+                    "BILD_2"
+                ],
+                "adjust_visibility": false,
+                "visible_wrong_count": 0
+            }
+        },
+        "type": "single Choice"
+    },
+    "store_matchings": {
+        "items": {
+            "task12": {
+                "response_identifier": "RESPONSE_1",
+                "source_choices": [
+                    {
+                        "identifier": "ID_1",
+                        "text": "Lastbild",
+                        "fixed": false,
+                        "match_max": 1
+                    },
+                    {
+                        "identifier": "ID_2",
+                        "text": "Schnittkraftverlauf",
+                        "fixed": false,
+                        "match_max": 1
+                    }
+                ],
+                "target_choices": [
+                    {
+                        "identifier": "IDT_1",
+                        "text": "BILD_5",
+                        "fixed": false,
+                        "match_max": 1
+                    },
+                    {
+                        "identifier": "IDT_2",
+                        "text": "BILD_1",
+                        "fixed": false,
+                        "match_max": 1
+                    }
+                ],
+                "correct_pairs": [
+                    {
+                        "source_id": "ID_1",
+                        "target_id": "IDT_1"
+                    },
+                    {
+                        "source_id": "ID_2",
+                        "target_id": "IDT_2"
+                    }
+                ],
+                "shuffle": true,
+                "max_associations": 0
+            },
+            "task24": {
+                "response_identifier": "RESPONSE_1",
+                "source_choices": [
+                    {
+                        "identifier": "ID_1",
+                        "text": "Lastbild",
+                        "fixed": false,
+                        "match_max": 1
+                    },
+                    {
+                        "identifier": "ID_2",
+                        "text": "Schnittkraftverlauf",
+                        "fixed": false,
+                        "match_max": 1
+                    }
+                ],
+                "target_choices": [
+                    {
+                        "identifier": "IDT_1",
+                        "text": "BILD_5",
+                        "fixed": false,
+                        "match_max": 1
+                    },
+                    {
+                        "identifier": "IDT_2",
+                        "text": "BILD_1",
+                        "fixed": false,
+                        "match_max": 1
+                    }
+                ],
+                "correct_pairs": [
+                    {
+                        "source_id": "ID_1",
+                        "target_id": "IDT_1"
+                    },
+                    {
+                        "source_id": "ID_2",
+                        "target_id": "IDT_2"
+                    }
+                ],
+                "shuffle": true,
+                "max_associations": 0
+            }
+        }
+    },
+    "store_graphical_assignment": {
+        "items": {}
+    },
+    "store_tables": {
+        "tabletype": "",
+        "items": {
+            "section1": {
+                "tables": [],
+                "show_tables": true
+            },
+            "task11": {
+                "tables": [],
+                "show_tables": true
+            },
+            "task12": {
+                "tables": [],
+                "show_tables": true
+            },
+            "section2": {
+                "tables": [],
+                "show_tables": true
+            },
+            "task21": {
+                "tables": [],
+                "show_tables": true
+            },
+            "task22": {
+                "tables": [],
+                "show_tables": true
+            },
+            "task23": {
+                "tables": [
+                    {
+                        "type": "ExcelTable",
+                        "id": "TABELLE_0",
+                        "excel_file": "tests/integration_test_data/input_dir/Beispiel.xlsx",
+                        "page": "Tabelle",
+                        "list_areas": [
+                            {
+                                "id": "TABELLE_0_1",
+                                "cell_tl": {
+                                    "value": "C4",
+                                    "colspan": 1,
+                                    "rowspan": 1
+                                },
+                                "cell_br": {
+                                    "value": "H8",
+                                    "colspan": 1,
+                                    "rowspan": 1
+                                }
+                            }
+                        ],
+                        "automatic_responses": true
+                    }
+                ],
+                "show_tables": true
+            },
+            "task24": {
+                "tables": [],
+                "show_tables": true
+            }
+        }
+    },
+    "store_variants": {
+        "use_variants": false,
+        "test_title": "Variantenzuweisung",
+        "item_body": "",
+        "feedback": {
+            "feedback_correct": {
+                "id": "FEEDBACK_CORRECT",
+                "value": "",
+                "type": "feddback_correct",
+                "condition": {
+                    "kind": "none",
+                    "value": null
+                }
+            },
+            "feedback_incorrect": {
+                "id": "FEEDBACK_INCORRECT",
+                "value": "",
+                "type": "feddback_incorrect",
+                "condition": {
+                    "kind": "none",
+                    "value": null
+                }
+            }
+        }
+    },
+    "teststructure": {
+        "list": [
+            {
+                "title": "Sektion 1",
+                "section_nr": 1,
+                "id": "section1",
+                "list_tasks": [
+                    {
+                        "title": "Aufgabe1",
+                        "task_nr": 1,
+                        "section_nr": 1,
+                        "id": "task11",
+                        "point_distribution": {
+                            "task": null,
+                            "gap": null
+                        },
+                        "variant_dependent_images": [],
+                        "variant_dependent_tables": []
+                    },
+                    {
+                        "title": "Aufgabe2",
+                        "task_nr": 2,
+                        "section_nr": 1,
+                        "id": "task12",
+                        "point_distribution": {
+                            "task": null,
+                            "gap": null
+                        },
+                        "variant_dependent_images": [],
+                        "variant_dependent_tables": []
+                    }
+                ],
+                "variant_dependent_images": [],
+                "excel_variables": null
+            },
+            {
+                "title": "Sektion 2",
+                "section_nr": 2,
+                "id": "section2",
+                "list_tasks": [
+                    {
+                        "title": "Lückentext",
+                        "task_nr": 1,
+                        "section_nr": 2,
+                        "id": "task21",
+                        "point_distribution": {
+                            "task": null,
+                            "gap": null
+                        },
+                        "variant_dependent_images": [],
+                        "variant_dependent_tables": []
+                    },
+                    {
+                        "title": "Auswahlaufgabe",
+                        "task_nr": 2,
+                        "section_nr": 2,
+                        "id": "task22",
+                        "point_distribution": {
+                            "task": null,
+                            "gap": null
+                        },
+                        "variant_dependent_images": [],
+                        "variant_dependent_tables": []
+                    },
+                    {
+                        "title": "Tabelle mit Lücken",
+                        "task_nr": 3,
+                        "section_nr": 2,
+                        "id": "task23",
+                        "point_distribution": {
+                            "task": null,
+                            "gap": null
+                        },
+                        "variant_dependent_images": [],
+                        "variant_dependent_tables": []
+                    },
+                    {
+                        "title": "Zuordnungsaufgabe",
+                        "task_nr": 4,
+                        "section_nr": 2,
+                        "id": "task24",
+                        "point_distribution": {
+                            "task": null,
+                            "gap": null
+                        },
+                        "variant_dependent_images": [],
+                        "variant_dependent_tables": []
+                    }
+                ],
+                "variant_dependent_images": [],
+                "excel_variables": null
+            }
+        ]
+    }
+}

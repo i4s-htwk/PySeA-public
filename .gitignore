@@ -1,0 +1,17 @@
+__pycache__/
+*.pyc
+*.idea/
+
+.DS_Store
+
+tmp_dir/
+.xml
+
+env
+venv
+.env
+.venv
+
+# keep output folderin PySeA-Workshop but ignore all files in it except .gitkeep
+examples/PySeA_workshop/output/*
+!examples/PySeA_workshop/output/.gitkeep

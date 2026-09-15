@@ -1,0 +1,597 @@
+{
+    "store_configurations": {
+        "test_title": "Script Test 3",
+        "path_excel_files": [],
+        "path_export": "",
+        "answer_acc": {
+            "selection": "relative",
+            "relative": 2,
+            "absolute": 0.1
+        },
+        "point_deduction": {
+            "is_used": false,
+            "point_deduction_per_attempt": 0.5,
+            "min_score_percentage": 40
+        },
+        "point_distribution": {
+            "gap": "1",
+            "selection": "2"
+        },
+        "advanced_settings": {
+            "navigation_mode": "test_path_control",
+            "keep_responses": true
+        },
+        "feedback": {
+            "feedback_correct": {
+                "id": "FEEDBACK_CORRECT",
+                "value": "",
+                "type": "feedback_correct",
+                "condition": {
+                    "kind": "none",
+                    "value": null
+                }
+            },
+            "feedback_incorrect": {
+                "id": "FEEDBACK_INCORRECT",
+                "value": "",
+                "type": "feedback_incorrect",
+                "condition": {
+                    "kind": "none",
+                    "value": null
+                }
+            }
+        },
+        "pass_score_percentage": 40
+    },
+    "store_feedback": {
+        "task11": {
+            "feedback_incorrect": [
+                {
+                    "id": "FEEDBACK_INCORRECT_1",
+                    "value": "das war das erste mal falsch",
+                    "type": "incorrect",
+                    "condition": {
+                        "kind": "list",
+                        "value": [
+                            {
+                                "kind": "int",
+                                "value": 1
+                            },
+                            {
+                                "kind": "int",
+                                "value": 1
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "FEEDBACK_INCORRECT_2",
+                    "value": "2. mal oder öfter falsch",
+                    "type": "incorrect",
+                    "condition": {
+                        "kind": "int",
+                        "value": 2
+                    }
+                },
+                {
+                    "id": "FEEDBACK_INCORRECT_3",
+                    "value": "Lücke 1 ist falsch",
+                    "type": "incorrect",
+                    "condition": {
+                        "kind": "excel_response",
+                        "value": {
+                            "id": "EXCEL_RESPONSE_1",
+                            "cell": "C3",
+                            "points": null
+                        }
+                    }
+                }
+            ],
+            "feedback_correct": {
+                "id": "FEEDBACK_CORRECT",
+                "value": "das war richtig",
+                "type": "correct",
+                "condition": {
+                    "kind": "none",
+                    "value": null
+                }
+            }
+        }
+    },
+    "store_images": {
+        "path_images": "tests/integration_test_data/input_dir/media_script3",
+        "images": [
+            {
+                "href": "Bild3.gif",
+                "id": "BILD_1",
+                "width": "400",
+                "height": "266.0770688566014",
+                "ratio": "0.6651926721415035"
+            },
+            {
+                "href": "Bild9.png",
+                "id": "BILD_2",
+                "width": "400",
+                "height": "266.0770688566014",
+                "ratio": "0.6651926721415035"
+            },
+            {
+                "href": "Bild8.png",
+                "id": "BILD_3",
+                "width": "400",
+                "height": "241.18761844598865",
+                "ratio": "0.6029690461149716"
+            },
+            {
+                "href": "Bild6.png",
+                "id": "BILD_4",
+                "width": "400",
+                "height": "281.5558343789209",
+                "ratio": "0.7038895859473023"
+            },
+            {
+                "href": "Bild7.png",
+                "id": "BILD_5",
+                "width": "400",
+                "height": "266.0770688566014",
+                "ratio": "0.6651926721415035"
+            },
+            {
+                "href": "Bild5.png",
+                "id": "BILD_6",
+                "width": "400",
+                "height": "216.424510423247",
+                "ratio": "0.5410612760581175"
+            },
+            {
+                "href": "Bild2.jpg",
+                "id": "BILD_7",
+                "width": "400",
+                "height": "241.18761844598865",
+                "ratio": "0.6029690461149716"
+            },
+            {
+                "href": "Bild1.svg",
+                "id": "BILD_8",
+                "width": "400",
+                "height": "0.0",
+                "ratio": "0"
+            },
+            {
+                "href": "Bild4.jpeg",
+                "id": "BILD_9",
+                "width": "400",
+                "height": "266.0770688566014",
+                "ratio": "0.6651926721415035"
+            }
+        ]
+    },
+    "store_item_body": {
+        "section1": "",
+        "task11": "Füllen sie die Lücken in der Tabelle: {TABELLE_0}",
+        "task12": "Wählen sie das richtige Lastbild aus: \n{SELECTION}",
+        "task13": "Füllen Sie die Lücken in der Tabelle aus: \n{V_TABELLE_1}"
+    },
+    "store_responses": {
+        "task11": {
+            "excel_responses": {
+                "excel_file": "tests/integration_test_data/input_dir/Beispiel.xlsx",
+                "page": "Varianten",
+                "answer_acc_from_excel": true,
+                "responses": [
+                    {
+                        "id": "EXCEL_RESPONSE_1",
+                        "cell": "C3",
+                        "points": null
+                    },
+                    {
+                        "id": "EXCEL_RESPONSE_2",
+                        "cell": "C5",
+                        "points": null
+                    },
+                    {
+                        "id": "EXCEL_RESPONSE_3",
+                        "cell": "C7",
+                        "points": null
+                    }
+                ]
+            },
+            "responses": []
+        },
+        "task12": {
+            "excel_responses": null,
+            "responses": []
+        },
+        "task13": {
+            "excel_responses": null,
+            "responses": []
+        }
+    },
+    "store_selections": {
+        "items": {
+            "task12": {
+                "id": "SELECTION",
+                "type": "singleChoice",
+                "correct": [
+                    "V_BILD_1"
+                ],
+                "incorrect": [
+                    "V_BILD_2",
+                    "V_BILD_3"
+                ],
+                "adjust_visibility": true,
+                "visible_wrong_count": 1
+            }
+        },
+        "type": "single Choice"
+    },
+    "store_tables": {
+        "tabletype": "",
+        "items": {
+            "section1": {
+                "tables": [],
+                "show_tables": true
+            },
+            "task11": {
+                "tables": [
+                    {
+                        "type": "CustomTable",
+                        "id": "TABELLE_0",
+                        "rows": 4,
+                        "columns": 2,
+                        "cells": [
+                            [
+                                {
+                                    "value": "Stäbe",
+                                    "colspan": 1,
+                                    "rowspan": 1
+                                },
+                                {
+                                    "value": "Schnittkraft",
+                                    "colspan": 1,
+                                    "rowspan": 1
+                                }
+                            ],
+                            [
+                                {
+                                    "value": "Stab 1",
+                                    "colspan": 1,
+                                    "rowspan": 1
+                                },
+                                {
+                                    "value": "EXCEL_RESPONSE_1",
+                                    "colspan": 1,
+                                    "rowspan": 1
+                                }
+                            ],
+                            [
+                                {
+                                    "value": "Stab 2",
+                                    "colspan": 1,
+                                    "rowspan": 1
+                                },
+                                {
+                                    "value": "EXCEL_RESPONSE_2",
+                                    "colspan": 1,
+                                    "rowspan": 1
+                                }
+                            ],
+                            [
+                                {
+                                    "value": "Stab 3",
+                                    "colspan": 1,
+                                    "rowspan": 1
+                                },
+                                {
+                                    "value": "EXCEL_RESPONSE_3",
+                                    "colspan": 1,
+                                    "rowspan": 1
+                                }
+                            ]
+                        ],
+                        "automatic_responses": false
+                    }
+                ],
+                "show_tables": true
+            },
+            "task12": {
+                "tables": [],
+                "show_tables": true
+            },
+            "task13": {
+                "tables": [
+                    {
+                        "type": "ExcelTable",
+                        "id": "TABELLE_0",
+                        "excel_file": "tests/integration_test_data/input_dir/Beispiel.xlsx",
+                        "page": "Tabelle",
+                        "list_areas": [
+                            {
+                                "id": "TABELLE_0_1",
+                                "cell_tl": {
+                                    "value": "J4",
+                                    "colspan": 1,
+                                    "rowspan": 1
+                                },
+                                "cell_br": {
+                                    "value": "L7",
+                                    "colspan": 1,
+                                    "rowspan": 1
+                                }
+                            }
+                        ],
+                        "automatic_responses": true
+                    },
+                    {
+                        "type": "ExcelTable",
+                        "id": "TABELLE_1",
+                        "excel_file": "tests/integration_test_data/input_dir/Beispiel.xlsx",
+                        "page": "Tabelle",
+                        "list_areas": [
+                            {
+                                "id": "TABELLE_1_1",
+                                "cell_tl": {
+                                    "value": "N4",
+                                    "colspan": 1,
+                                    "rowspan": 1
+                                },
+                                "cell_br": {
+                                    "value": "P7",
+                                    "colspan": 1,
+                                    "rowspan": 1
+                                }
+                            }
+                        ],
+                        "automatic_responses": true
+                    },
+                    {
+                        "type": "ExcelTable",
+                        "id": "TABELLE_2",
+                        "excel_file": "tests/integration_test_data/input_dir/Beispiel.xlsx",
+                        "page": "Tabelle",
+                        "list_areas": [
+                            {
+                                "id": "TABELLE_2_1",
+                                "cell_tl": {
+                                    "value": "R4",
+                                    "colspan": 1,
+                                    "rowspan": 1
+                                },
+                                "cell_br": {
+                                    "value": "T7",
+                                    "colspan": 1,
+                                    "rowspan": 1
+                                }
+                            }
+                        ],
+                        "automatic_responses": true
+                    }
+                ],
+                "show_tables": true
+            }
+        }
+    },
+    "store_variants": {
+        "use_variants": true,
+        "test_title": "Variantenzuweisung",
+        "item_body": "Geben Sie ihre Matrikelnummer ein: {RESPONSE}",
+        "feedback": {
+            "feedback_correct": {
+                "id": "FEEDBACK_CORRECT",
+                "value": "",
+                "type": "feddback_correct",
+                "condition": {
+                    "kind": "none",
+                    "value": null
+                }
+            },
+            "feedback_incorrect": {
+                "id": "FEEDBACK_INCORRECT",
+                "value": "",
+                "type": "feddback_incorrect",
+                "condition": {
+                    "kind": "none",
+                    "value": null
+                }
+            }
+        },
+        "variable_dependent_assignment": {
+            "list_variables": [
+                {
+                    "id": "VARIABLE_1",
+                    "variables": [
+                        "a"
+                    ],
+                    "value_response": 1,
+                    "list_conditions": [
+                        {
+                            "lower_bound": 0,
+                            "upper_bound": 3,
+                            "values": {
+                                "a": 0
+                            }
+                        },
+                        {
+                            "lower_bound": 4,
+                            "upper_bound": 7,
+                            "values": {
+                                "a": 1
+                            }
+                        },
+                        {
+                            "lower_bound": 8,
+                            "upper_bound": 9,
+                            "values": {
+                                "a": 2
+                            }
+                        }
+                    ]
+                },
+                {
+                    "id": "VARIABLE_2",
+                    "variables": [
+                        "b"
+                    ],
+                    "value_response": 2,
+                    "list_conditions": [
+                        {
+                            "lower_bound": 0,
+                            "upper_bound": 2,
+                            "values": {
+                                "b": 5
+                            }
+                        },
+                        {
+                            "lower_bound": 3,
+                            "upper_bound": 5,
+                            "values": {
+                                "b": 5.5
+                            }
+                        },
+                        {
+                            "lower_bound": 6,
+                            "upper_bound": 9,
+                            "values": {
+                                "b": 6
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "teststructure": {
+        "list": [
+            {
+                "title": "Sektion 1",
+                "section_nr": 1,
+                "id": "section1",
+                "list_tasks": [
+                    {
+                        "title": "Tabelle mit Antworten aus Exceldatei",
+                        "task_nr": 1,
+                        "section_nr": 1,
+                        "id": "task11",
+                        "point_distribution": {
+                            "task": null,
+                            "gap": null
+                        },
+                        "variant_dependent_images": [],
+                        "variant_dependent_tables": []
+                    },
+                    {
+                        "title": "Auswahlaufgabe mit Variantenabhängigen Bildern",
+                        "task_nr": 2,
+                        "section_nr": 1,
+                        "id": "task12",
+                        "point_distribution": {
+                            "task": null,
+                            "gap": null
+                        },
+                        "variant_dependent_images": [
+                            {
+                                "id": "V_BILD_1",
+                                "images": {
+                                    "value_1": {
+                                        "image_id": "BILD_8",
+                                        "lower": 1,
+                                        "upper": 3
+                                    },
+                                    "value_2": {
+                                        "image_id": "BILD_7",
+                                        "lower": 4,
+                                        "upper": 6
+                                    },
+                                    "value_3": {
+                                        "image_id": "BILD_1",
+                                        "lower": 7,
+                                        "upper": 9
+                                    }
+                                }
+                            },
+                            {
+                                "id": "V_BILD_2",
+                                "images": {
+                                    "value_1": {
+                                        "image_id": "BILD_9",
+                                        "lower": 1,
+                                        "upper": 3
+                                    },
+                                    "value_2": {
+                                        "image_id": "BILD_6",
+                                        "lower": 4,
+                                        "upper": 6
+                                    },
+                                    "value_3": {
+                                        "image_id": "BILD_4",
+                                        "lower": 7,
+                                        "upper": 9
+                                    }
+                                }
+                            },
+                            {
+                                "id": "V_BILD_3",
+                                "images": {
+                                    "value_1": {
+                                        "image_id": "BILD_5",
+                                        "lower": 1,
+                                        "upper": 3
+                                    },
+                                    "value_2": {
+                                        "image_id": "BILD_3",
+                                        "lower": 4,
+                                        "upper": 6
+                                    },
+                                    "value_3": {
+                                        "image_id": "BILD_2",
+                                        "lower": 7,
+                                        "upper": 9
+                                    }
+                                }
+                            }
+                        ],
+                        "variant_dependent_tables": []
+                    },
+                    {
+                        "title": "Aufgabe mit variantenabhängigen Tabellen",
+                        "task_nr": 3,
+                        "section_nr": 1,
+                        "id": "task13",
+                        "point_distribution": {
+                            "task": null,
+                            "gap": null
+                        },
+                        "variant_dependent_images": [],
+                        "variant_dependent_tables": [
+                            {
+                                "id": "V_TABELLE_1",
+                                "tables": {
+                                    "value_1": {
+                                        "table_id": "TABELLE_0_1",
+                                        "lower": 1,
+                                        "upper": 3,
+                                        "task_id": ""
+                                    },
+                                    "value_2": {
+                                        "table_id": "TABELLE_1_1",
+                                        "lower": 4,
+                                        "upper": 6,
+                                        "task_id": ""
+                                    },
+                                    "value_3": {
+                                        "table_id": "TABELLE_2_1",
+                                        "lower": 7,
+                                        "upper": 9,
+                                        "task_id": ""
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                ],
+                "variant_dependent_images": [],
+                "excel_variables": null
+            }
+        ]
+    }
+}

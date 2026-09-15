@@ -1,0 +1,301 @@
+{
+    "store_configurations": {
+        "test_title": "Script Test 4",
+        "path_excel_files": [],
+        "path_export": "",
+        "answer_acc": {
+            "selection": "relative",
+            "relative": 2,
+            "absolute": 0.1
+        },
+        "point_deduction": {
+            "is_used": true,
+            "point_deduction_per_attempt": 0.5,
+            "min_score_percentage": 40
+        },
+        "point_distribution": {
+            "gap": "1",
+            "selection": "2",
+            "matching": "2"
+        },
+        "advanced_settings": {
+            "navigation_mode": "test_path_control",
+            "keep_responses": false
+        },
+        "feedback": {
+            "feedback_correct": {
+                "id": "FEEDBACK_CORRECT",
+                "value": "Sie haben {SCORE} Punkte erreicht und damit den Test bestanden",
+                "type": "feedback_correct",
+                "condition": {
+                    "kind": "none",
+                    "value": null
+                }
+            },
+            "feedback_incorrect": {
+                "id": "FEEDBACK_INCORRECT",
+                "value": "Sie haben {SCORE} Punkte erreicht und damit den Test leider nicht bestanden",
+                "type": "feedback_incorrect",
+                "condition": {
+                    "kind": "none",
+                    "value": null
+                }
+            }
+        },
+        "pass_score_percentage": 40
+    },
+    "store_feedback": {},
+    "store_images": {
+        "path_images": "",
+        "images": []
+    },
+    "store_item_body": {
+        "section1": "Bitte rechnen Sie in den Aufgaben mit folgenden Werten weiter: \n{TABELLE_0}\n $$F =$${EXCEL_VARIABLE_1_5}kN",
+        "task11": "Ordnen Sie die Bildausschnitte den richtigen Bereichen im Hintergrundbild zu:\n{GRAPHICAL_ASSIGNMENT}"
+    },
+    "store_responses": {
+        "task11": {
+            "excel_responses": null,
+            "responses": []
+        }
+    },
+    "store_selections": {
+        "items": {},
+        "type": "single Choice"
+    },
+    "store_matchings": {
+        "items": {}
+    },
+    "store_graphical_assignment": {
+        "items": {
+            "task11": {
+                "original_image_path": "tests/integration_test_data/input_dir/media_script4/Original.excalidraw.png",
+                "mask_image_path": "tests/integration_test_data/input_dir/media_script4/Maske.excalidraw.png",
+                "correct_image_path": "tests/integration_test_data/input_dir/media_script4/Richtig.excalidraw.png",
+                "wrong_image_paths": [
+                    "tests/integration_test_data/input_dir/media_script4/Falsch.excalidraw.png"
+                ],
+                "task_id": "task11",
+                "cut_areas": [
+                    [
+                        18,
+                        18,
+                        64,
+                        64
+                    ],
+                    [
+                        238,
+                        18,
+                        80,
+                        64
+                    ]
+                ],
+                "correct_snippets": [
+                    {
+                        "index": 0,
+                        "x": 18,
+                        "y": 18,
+                        "width": 64,
+                        "height": 64,
+                        "source_image": "tests/integration_test_data/input_dir/media_script4/Richtig.excalidraw.png",
+                        "output_path": "tmp_dir/graphical_assignments/task11/task11_correct_snippet_0.png"
+                    },
+                    {
+                        "index": 1,
+                        "x": 238,
+                        "y": 18,
+                        "width": 80,
+                        "height": 64,
+                        "source_image": "tests/integration_test_data/input_dir/media_script4/Richtig.excalidraw.png",
+                        "output_path": "tmp_dir/graphical_assignments/task11/task11_correct_snippet_1.png"
+                    }
+                ],
+                "wrong_snippets": [
+                    {
+                        "index": 0,
+                        "x": 18,
+                        "y": 18,
+                        "width": 64,
+                        "height": 64,
+                        "source_image": "tests/integration_test_data/input_dir/media_script4/Falsch.excalidraw.png",
+                        "output_path": "tmp_dir/graphical_assignments/task11/task11_wrong_0_snippet_0.png"
+                    },
+                    {
+                        "index": 1,
+                        "x": 238,
+                        "y": 18,
+                        "width": 80,
+                        "height": 64,
+                        "source_image": "tests/integration_test_data/input_dir/media_script4/Falsch.excalidraw.png",
+                        "output_path": "tmp_dir/graphical_assignments/task11/task11_wrong_0_snippet_1.png"
+                    }
+                ]
+            }
+        }
+    },
+    "store_tables": {
+        "tabletype": "",
+        "items": {
+            "section1": {
+                "tables": [
+                    {
+                        "type": "CustomTable",
+                        "id": "TABELLE_0",
+                        "rows": 5,
+                        "columns": 2,
+                        "cells": [
+                            [
+                                {
+                                    "value": "Stäbe",
+                                    "colspan": 1,
+                                    "rowspan": 1
+                                },
+                                {
+                                    "value": "Stablänge [m]",
+                                    "colspan": 1,
+                                    "rowspan": 1
+                                }
+                            ],
+                            [
+                                {
+                                    "value": "Stab 1",
+                                    "colspan": 1,
+                                    "rowspan": 1
+                                },
+                                {
+                                    "value": "EXCEL_VARIABLE_1_1",
+                                    "colspan": 1,
+                                    "rowspan": 1
+                                }
+                            ],
+                            [
+                                {
+                                    "value": "Stab 2",
+                                    "colspan": 1,
+                                    "rowspan": 1
+                                },
+                                {
+                                    "value": "EXCEL_VARIABLE_1_2",
+                                    "colspan": 1,
+                                    "rowspan": 1
+                                }
+                            ],
+                            [
+                                {
+                                    "value": "Stab 3",
+                                    "colspan": 1,
+                                    "rowspan": 1
+                                },
+                                {
+                                    "value": "EXCEL_VARIABLE_1_3",
+                                    "colspan": 1,
+                                    "rowspan": 1
+                                }
+                            ],
+                            [
+                                {
+                                    "value": "Stab 4",
+                                    "colspan": 1,
+                                    "rowspan": 1
+                                },
+                                {
+                                    "value": "EXCEL_VARIABLE_1_4",
+                                    "colspan": 1,
+                                    "rowspan": 1
+                                }
+                            ]
+                        ],
+                        "automatic_responses": false
+                    }
+                ],
+                "show_tables": true
+            },
+            "task11": {
+                "tables": [],
+                "show_tables": true
+            }
+        }
+    },
+    "store_variants": {
+        "use_variants": true,
+        "test_title": "Variantenzuweisung",
+        "item_body": "Geben Sie ihre Matrikelnummer ein: {RESPONSE}",
+        "feedback": {
+            "feedback_correct": {
+                "id": "FEEDBACK_CORRECT",
+                "value": "",
+                "type": "feddback_correct",
+                "condition": {
+                    "kind": "none",
+                    "value": null
+                }
+            },
+            "feedback_incorrect": {
+                "id": "FEEDBACK_INCORRECT",
+                "value": "",
+                "type": "feddback_incorrect",
+                "condition": {
+                    "kind": "none",
+                    "value": null
+                }
+            }
+        },
+        "student_id_to_variant_assignment": {
+            "count_variants": 9,
+            "multiplier": 2654435761,
+            "increment": 1013904223,
+            "modulus": 4294967296
+        }
+    },
+    "teststructure": {
+        "list": [
+            {
+                "title": "Sektion 1",
+                "section_nr": 1,
+                "id": "section1",
+                "list_tasks": [
+                    {
+                        "title": "Grafische Zuordnungsaufgabe",
+                        "task_nr": 1,
+                        "section_nr": 1,
+                        "id": "task11",
+                        "point_distribution": {
+                            "task": null,
+                            "gap": null
+                        },
+                        "variant_dependent_images": [],
+                        "variant_dependent_tables": []
+                    }
+                ],
+                "variant_dependent_images": [],
+                "excel_variables": {
+                    "section_nr": 1,
+                    "excel_file": "tests/integration_test_data/input_dir/Beispiel.xlsx",
+                    "page": "Varianten",
+                    "variables": [
+                        {
+                            "variable_id": "EXCEL_VARIABLE_1_1",
+                            "cell": "C10"
+                        },
+                        {
+                            "variable_id": "EXCEL_VARIABLE_1_2",
+                            "cell": "C11"
+                        },
+                        {
+                            "variable_id": "EXCEL_VARIABLE_1_3",
+                            "cell": "C12"
+                        },
+                        {
+                            "variable_id": "EXCEL_VARIABLE_1_4",
+                            "cell": "C13"
+                        },
+                        {
+                            "variable_id": "EXCEL_VARIABLE_1_5",
+                            "cell": "C14"
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}
