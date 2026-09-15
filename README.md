@@ -94,6 +94,13 @@ PySeA/
 
 ---
 
+## Autoren
+
+- [Kjell Bühler](https://github.com/kjellbuehler) (@kjellbuehler)
+- [Julian Schmidt](https://github.com/julian-schmidt02) (@julian-schmidt02)
+
+---
+
 ## Mitwirken
 
 Wir freuen uns über Beiträge! Bitte halte dich an unsere [Entwicklungsrichtlinien](CONTRIBUTING.md), um die Code-Qualität zu sichern.
