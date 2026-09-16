@@ -8,6 +8,7 @@ Willkommen zum **PySeA Workshop**! Dieser Ordner enthält eine Sammlung von Beis
 
 - **[Vortragsfolien](PySeA.pdf)**: Folien zur PySeA-Vorstellung beim 27. Netzwerktreffen Mathematik/Physik + E-Learning (17.09.2026)
 - **[PySeA-Setup](#pysea-setup)**: Installation und Grundeinrichtung
+- **[PySeA-Hilfe](../README.md)**: Handbuch mit allen Funktionen und dem allgemeinen Workflow
 
 ### Aufgaben
 1. **[Minimalbeispiel](#1-minimalbeispiel)**: Einfache Teststruktur mit einer Rechenaufgabe
