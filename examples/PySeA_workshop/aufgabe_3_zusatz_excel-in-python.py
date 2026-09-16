@@ -1,4 +1,11 @@
 ################################
+# Projektordner (PySeA-public) als Suchpfad und Arbeitsordner setzen, damit das Skript auch
+# ueber den Run-Button der IDE funktioniert (nicht nur mit "python -m ...")
+import os, sys, pathlib
+PROJEKT = pathlib.Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(PROJEKT))
+os.chdir(PROJEKT)
+
 from openpyxl import Workbook
 from openpyxl.styles import numbers
 

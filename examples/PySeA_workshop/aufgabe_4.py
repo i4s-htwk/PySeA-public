@@ -7,6 +7,13 @@
 ###############################
 # Module einladen
 ###############################
+# Projektordner (PySeA-public) als Suchpfad und Arbeitsordner setzen, damit das Skript auch
+# ueber den Run-Button der IDE funktioniert (nicht nur mit "python -m ...")
+import os, sys, pathlib
+PROJEKT = pathlib.Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(PROJEKT))
+os.chdir(PROJEKT)
+
 from backend.facades import TestFacade #Import des Moduls "TestFacade" - darin sind alle Funktionen enthalten, die für die Erstellung eines Tests benötigt werden
 
 ###############################
@@ -37,7 +44,7 @@ variants.set_feedback("Ungültige Eingabe. Wählen Sie eine gültige Variante. (
 section_1 = test.add_section(title = "Varianten")
 task_1 = section_1.add_task(title = "Aufgabe 4")
 
-###############################xw
+###############################
 # Aufgabe 1 editieren
 ###############################
 excel_file = "examples/PySeA_workshop/files/var_ergebnisse.xlsx" # Pfad zur Excel-Datei

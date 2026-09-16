@@ -8,6 +8,13 @@
 # Module einladen
 ###############################
 from openpyxl import load_workbook # Import des Moduls "load_workbook" aus der Bibliothek "openpyxl" - damit können Excel-Dateien gelesen werden
+# Projektordner (PySeA-public) als Suchpfad und Arbeitsordner setzen, damit das Skript auch
+# ueber den Run-Button der IDE funktioniert (nicht nur mit "python -m ...")
+import os, sys, pathlib
+PROJEKT = pathlib.Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(PROJEKT))
+os.chdir(PROJEKT)
+
 from backend.facades import TestFacade #Import des Moduls "TestFacade" - darin sind alle Funktionen enthalten, die für die Erstellung eines Tests benötigt werden
 
 ###############################
@@ -58,9 +65,9 @@ task_1.item_body(
     "Die folgende Tabelle zeigt die Produkte der entsprechenden Spalten- und Zeilenvariable" +
     area + "\n" +
     "Lesen Sie daraus die folgenden Produkte ab: \n"+
-    "$$A \cdot F = $$"+response_1_1 + "\n" +
-    "$$B \cdot E = $$"+response_1_2 + "\n" +
-    "$$C \cdot D = $$"+response_1_3 + "\n"
+    "$$A \\cdot F = $$"+response_1_1 + "\n" +
+    "$$B \\cdot E = $$"+response_1_2 + "\n" +
+    "$$C \\cdot D = $$"+response_1_3 + "\n"
 )
 
 ###############################

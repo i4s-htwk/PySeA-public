@@ -7,6 +7,13 @@
 ###############################
 # Module einladen
 ###############################
+# Projektordner (PySeA-public) als Suchpfad und Arbeitsordner setzen, damit das Skript auch
+# ueber den Run-Button der IDE funktioniert (nicht nur mit "python -m ...")
+import os, sys, pathlib
+PROJEKT = pathlib.Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(PROJEKT))
+os.chdir(PROJEKT)
+
 from backend.facades import TestFacade #Import des Moduls "TestFacade" - darin sind alle Funktionen enthalten, die für die Erstellung eines Tests benötigt werden
 
 ###############################
@@ -69,5 +76,5 @@ test.create_test("examples/PySeA_workshop/output/") # Relativer Pfad von dort, w
 # Übungsaufgaben
 ###############################
 # Aufgabe 1:
-# - Fügen Sie die Bilder "Feedback_falsch.jpg" und "Feedback_korrekt.jpg" aus dem "examples/PySeA_workshop/files" Ordner dem entsprechenden Feedback hinzu.
+# - Fügen Sie die Bilder "Feedback_falsch.jpg" und "Feedback_korrekt.png" aus dem "examples/PySeA_workshop/files" Ordner dem entsprechenden Feedback hinzu.
 # - Erstellen Sie innerhalb des Pythonskripts eine Darstellung einer Parabel (z. B. mit Matplotlib) und binden Sie diese als neue Aufgabe ein
