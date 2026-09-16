@@ -35,11 +35,11 @@ Ohne Git: auf GitHub über **Code > Download ZIP** herunterladen und entpacken.
 
 #### 2️⃣ Virtuelle Umgebung erstellen und aktivieren
 
-Empfohlen ist **Python 3.12**. Mit den in `requirements.txt` festgelegten Paketversionen funktionieren Python 3.9 bis 3.12; für Python 3.13 und 3.14 verwenden Sie in Schritt 3 die Datei `requirements-workshop.txt`.
+Die Workshop-Skripte laufen mit **Python 3.11 bis 3.14** (getestet). Falls Sie noch kein Python haben: aktuelle Version von [python.org](https://www.python.org/downloads/) installieren, unter Windows dabei die Option „Add python.exe to PATH“ anhaken.
 
 | | Windows (PowerShell) | macOS / Linux |
 |---|---|---|
-| Umgebung erstellen | `py -3.12 -m venv .venv` | `python3.12 -m venv .venv` |
+| Umgebung erstellen | `py -m venv .venv` | `python3 -m venv .venv` |
 | Umgebung aktivieren | `.\.venv\Scripts\Activate.ps1` | `source .venv/bin/activate` |
 
 Hinweis für Windows: Blockiert PowerShell die Aktivierung, hilft für die aktuelle Sitzung `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass`.
@@ -48,10 +48,10 @@ Hinweis für Windows: Blockiert PowerShell die Aktivierung, hilft für die aktue
 
 ```bash
 python -m pip install --upgrade pip
-python -m pip install -r requirements.txt
+python -m pip install -r requirements-workshop.txt
 ```
 
-Mit Python 3.13 oder 3.14 stattdessen: `python -m pip install -r requirements-workshop.txt` (enthält nur die Pakete, die die Skripte brauchen).
+Die Datei `requirements-workshop.txt` enthält genau die fünf Pakete, die die Skripte brauchen (Installation dauert etwa eine Minute). Die große `requirements.txt` im Projektordner ist nur für die grafische Oberfläche und die Entwicklung nötig.
 
 #### 4️⃣ Skripte ausführen
 
@@ -151,7 +151,7 @@ Mit Python 3.13 oder 3.14 stattdessen: `python -m pip install -r requirements-wo
 | Problem | Lösung |
 |---------|--------|
 | `ModuleNotFoundError: backend` | Skript aus dem Projektordner `PySeA-public` starten (`python -m examples.PySeA_workshop.aufgabe_1`), nicht aus `examples/` heraus |
-| `pip` bricht bei `numpy` mit einem Build-Fehler ab | Python 3.13/3.14 im Einsatz: `requirements-workshop.txt` installieren oder Python 3.12 verwenden |
+| `pip` bricht bei `numpy` mit einem Build-Fehler ab | Es wurde `requirements.txt` statt `requirements-workshop.txt` installiert; für den Workshop reicht die kleine Liste |
 | Bilder werden nicht angezeigt | Pfad in `test.load_images()` prüfen und sicherstellen, dass die Bilder im Ordner liegen |
 | Excel-Datei nicht gefunden | Pfad prüfen; das Skript muss aus dem Projektordner heraus laufen |
 | `KeyError` bei `images["..."]` | Dateiname inklusive Endung exakt wie im Ordner angeben (z. B. `Feedback_korrekt.png`) |
