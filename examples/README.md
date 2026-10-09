@@ -1232,6 +1232,30 @@ Bei False werden bereits eingegebene Antworten bei einem neuen Antwortversuch ni
 
 ---
 
+## 7.9 Leere Lücke als richtig werten, wenn Korrektwert 0 ist
+
+Bei manchen Aufgaben (z. B. Schnittkraftverläufen) ist der korrekte Wert einer Lücke `0`. Standardmäßig wertet PySeA eine leer gelassene Lücke in diesem Fall als richtig:
+
+```python
+settings.set_accept_empty_as_zero(True)   # Standardwert, muss nicht explizit gesetzt werden
+```
+
+Die Einstellung gilt für den ganzen Test (nicht pro Aufgabe oder Lücke) und betrifft:
+
+- normale Lücken (`task.response(0)`),
+- automatisch aus Tabellen erzeugte Lücken (`automatic_responses`),
+- Lücken aus Exceldateien (`task.excel_responses()`).
+
+Soll stattdessen immer eine explizite `0` verlangt werden, muss die Einstellung deaktiviert werden:
+
+```python
+settings.set_accept_empty_as_zero(False)
+```
+
+Bei `False` wird eine leer gelassene Lücke immer als falsch gewertet, unabhängig vom korrekten Wert.
+
+---
+
 # 8. Test exportieren
 
 Am Ende wird der Test exportiert.
@@ -1293,7 +1317,7 @@ Abgedeckte Punkte:
 
 ## 9.3 script3.py
 
-Dieses Skript erstellt einen neuen, variantenabhängigen Test. Die Varianten werden über selbst definierte Regeln aus der Matrikelnummer bestimmt. Der Test enthält eine Aufgabe mit Antworten und einer Tabelle aus einer Excel-Datei inklusive mehrerer Feedback-Varianten, eine Auswahlaufgabe mit variantenabhängigen Bildern sowie eine Aufgabe mit einer variantenabhängigen Tabelle.
+Dieses Skript erstellt einen neuen, variantenabhängigen Test. Die Varianten werden über selbst definierte Regeln aus der Matrikelnummer bestimmt. Der Test enthält eine Aufgabe mit Antworten und einer Tabelle aus einer Excel-Datei inklusive mehrerer Feedback-Varianten, eine Auswahlaufgabe mit variantenabhängigen Bildern, eine Aufgabe mit einer variantenabhängigen Tabelle sowie eine Aufgabe mit einer normalen Lücke. Eine der Antworten aus der Exceldatei (`task_1`) und eine der normalen Lücken (`task_4`) haben jeweils den Korrektwert `0`, um die Einstellung "Leere Lücke als richtig werten" zu demonstrieren.
 
 Abgedeckte Punkte:
 
@@ -1302,6 +1326,7 @@ Abgedeckte Punkte:
 - [2.2 Excel-Datei verwenden](#22-excel-datei-verwenden)
 - [3.3 Variantenvergabe über Variablen](#33-variantenvergabe-über-variablen)
 - [4 Teststruktur erstellen](#4-teststruktur-erstellen)
+- [6.2.1 Normale Antworten](#621-normale-antworten)
 - [6.2.2 Antworten aus Exceldatei](#622-antworten-aus-exceldatei)
 - [6.3.1 Tabellen aus Exceldatei](#631-tabellen-aus-exceldatei)
 - [6.3.2 Benutzerdefinierte Tabellen](#632-benutzerdefinierte-tabellen)
@@ -1310,6 +1335,7 @@ Abgedeckte Punkte:
 - [6.6.2 Variantenabhängige Tabellen](#662-variantenabhängige-tabellen)
 - [6.7 Feedback definieren](#67-feedback-definieren)
 - [7.2 Navigationsmodus setzen](#72-navigationsmodus-setzen)
+- [7.9 Leere Lücke als richtig werten, wenn Korrektwert 0 ist](#79-leere-lücke-als-richtig-werten-wenn-korrektwert-0-ist)
 - [8 Test exportieren](#8-test-exportieren)
 
 ---

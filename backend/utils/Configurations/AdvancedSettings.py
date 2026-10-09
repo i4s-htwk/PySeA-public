@@ -2,6 +2,7 @@ class AdvancedSettings:
     def __init__(self):
         self.navigation_mode = "nonlinear"
         self.keep_responses = True
+        self.accept_empty_as_zero = True
 
     def set_navigation_mode(self, navigation_mode):
         if navigation_mode in ["test_path_control", "nonlinear", "linear"]:
@@ -12,7 +13,8 @@ class AdvancedSettings:
     def to_dict(self):
         return {
             "navigation_mode": self.navigation_mode,
-            "keep_responses": self.keep_responses
+            "keep_responses": self.keep_responses,
+            "accept_empty_as_zero": self.accept_empty_as_zero
         }
 
     @staticmethod
@@ -20,4 +22,5 @@ class AdvancedSettings:
         as_obj = AdvancedSettings()
         as_obj.navigation_mode = data.get("navigation_mode", "nonlinear")
         as_obj.keep_responses = data.get("keep_responses", True)
+        as_obj.accept_empty_as_zero = data.get("accept_empty_as_zero", True)
         return as_obj

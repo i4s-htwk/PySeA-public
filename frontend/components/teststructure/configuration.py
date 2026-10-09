@@ -131,7 +131,8 @@ def render_advanced_settings(advanced_settings):
                 clearable=False,
                 style={"width": "250px", "marginBottom": "5px"}
             ),
-            dcc.Checklist(id="cb_keep_responses", options=[{"label": "Antworten behalten", "value": "true"}], value=[] if not advanced_settings.keep_responses else ["true"], style={"paddingBottom": "10px"})],
+            dcc.Checklist(id="cb_keep_responses", options=[{"label": "Antworten behalten", "value": "true"}], value=[] if not advanced_settings.keep_responses else ["true"], style={"paddingBottom": "10px"}),
+            dcc.Checklist(id="cb_accept_empty_as_zero", options=[{"label": "Leere Lücke als richtig werten, wenn Korrektwert 0 ist", "value": "true"}], value=[] if not advanced_settings.accept_empty_as_zero else ["true"], style={"paddingBottom": "10px"})],
             style={"display": "flex", "flex-direction": "column", "marginLeft": "45px" ,"marginTop":"15px"})],
         style={"display": "flex", "alignItems": "flex-start", "border": "0.5px solid black", "padding": "5px",
               "marginTop": "15px"})
@@ -186,6 +187,7 @@ def rerender_configuration(is_saved, store_configurations):
 
     Input("dd_navigation_mode", "value"),
     Input("cb_keep_responses", "value"),
+    Input("cb_accept_empty_as_zero", "value"),
 
     Input("i_feedback_correct_config", "value"),
     Input("i_feedback_incorrect_config", "value"),
@@ -196,7 +198,7 @@ def rerender_configuration(is_saved, store_configurations):
 )
 def speichere_testconfiguration(titel, path_excel_file, path_export, new_excel_file, remove_excel_file, d_acc_answers, i_acc_answers,
                                 use_point_deduction, point_deduction_per_attempt, min_score_percentage, points_per_gap, points_per_selection,
-                                naviagtion_mode, keep_responses, feedback_correct, feedback_incorrect, pass_score_percentage,
+                                naviagtion_mode, keep_responses, accept_empty_as_zero, feedback_correct, feedback_incorrect, pass_score_percentage,
                                 store_configurations):
 
     configurations = StoreConfigurations.from_dict(store_configurations or {})
@@ -232,6 +234,8 @@ def speichere_testconfiguration(titel, path_excel_file, path_export, new_excel_f
         configurations.advanced_settings.navigation_mode = naviagtion_mode
     elif ctx.triggered_id == "cb_keep_responses":
         configurations.advanced_settings.keep_responses = "true" in keep_responses
+    elif ctx.triggered_id == "cb_accept_empty_as_zero":
+        configurations.set_accept_empty_as_zero("true" in accept_empty_as_zero)
     elif ctx.triggered_id == "i_feedback_correct_config":
         configurations.set_feedback("correct", feedback_correct)
     elif ctx.triggered_id == "i_feedback_incorrect_config":

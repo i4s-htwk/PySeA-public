@@ -334,17 +334,27 @@ class AssessmentItem:
             if t.id not in used_content:
                 del tables[i]
 
-    def set_score_excel_response(self, parent, response_id):
+    def set_score_excel_response(self, parent, response_id, accept_empty_as_zero=False):
         set_outcome_value = ET.SubElement(
             parent,
             "setOutcomeValue",
             {"identifier": f"SCORE_{response_id}", "class": "ONYX_SET_SCORE"}
         )
+
+        if accept_empty_as_zero:
+            maxima_value = (
+                "float(if (($(1) = NULL) and ($(2) = 0)) then $(4) "
+                "else if (($(1) - $(2) >= -$(3)) and ($(1) - $(2) <= $(3))) then $(4) "
+                "else $(5));"
+            )
+        else:
+            maxima_value = "float(if (($(1) - $(2) >= -$(3)) and ($(1) - $(2) <= $(3))) then $(4) else $(5));"
+
         custom_operator = ET.SubElement(set_outcome_value,
                 "customOperator",
                 {
                     "definition": "MAXIMA",
-                    "value": "float(if (($(1) - $(2) >= -$(3)) and ($(1) - $(2) <= $(3))) then $(4) else $(5));"
+                    "value": maxima_value
                 })
         ET.SubElement(custom_operator, "variable", {"identifier": response_id})
         ET.SubElement(custom_operator, "correct", {"identifier": response_id})
@@ -352,11 +362,23 @@ class AssessmentItem:
         ET.SubElement(custom_operator, "variable", {"identifier": f"MAXSCORE_{response_id}"})
         ET.SubElement(custom_operator, "variable", {"identifier": f"MINSCORE_{response_id}"})
 
+    @staticmethod
+    def _response_can_be_zero(response):
+        if isinstance(response, ExcelResponse):
+            return True
+        if isinstance(response, Response):
+            try:
+                return float(response.value) == 0.0
+            except (TypeError, ValueError):
+                return False
+        return False
+
     def response_processing(self, answer_acc, responses, answer_acc_from_excel, feedback, configuration, selection, matching, graphical_assignment, point_distribution_gap):
 
         point_deduction_is_used = configuration.point_deduction.is_used
         point_deduction_per_attempt = configuration.point_deduction.point_deduction_per_attempt
         min_score_percentage = configuration.point_deduction.min_score_percentage/100
+        accept_empty_as_zero = configuration.advanced_settings.accept_empty_as_zero
 
         if answer_acc.selection == "relative":
             equal_attribs={"toleranceMode":"relative", "tolerance": str(answer_acc.relative) + " " + str(answer_acc.relative), "includeLowerBound": "true", "includeUpperBound": "true"}
@@ -372,11 +394,13 @@ class AssessmentItem:
 
         for response in responses:
             if isinstance(response, ExcelResponse) and answer_acc_from_excel:
-                self.set_score_excel_response(response_processing, response.id)
+                self.set_score_excel_response(response_processing, response.id, accept_empty_as_zero)
             elif isinstance(response, Matching) or isinstance(response, GraphicalAssignment):
                 continue
             else:
-                response_processing_response(response_processing, response.id, equal_attribs)
+                response_processing_response(
+                    response_processing, response.id, equal_attribs,
+                    accept_empty_as_zero and self._response_can_be_zero(response))
 
         set_outcome_value = ET.SubElement(response_processing, "setOutcomeValue", {"identifier":"SCORE"})
         sum = ET.SubElement(set_outcome_value, "sum")

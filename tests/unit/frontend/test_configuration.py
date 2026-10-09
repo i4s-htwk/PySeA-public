@@ -43,10 +43,17 @@ def test_point_distribution_uses_values():
 
 
 def test_advanced_settings_uses_navigation_and_keep_responses():
-    obj = SimpleNamespace(navigation_mode="linear", keep_responses=True)
+    obj = SimpleNamespace(navigation_mode="linear", keep_responses=True, accept_empty_as_zero=True)
     layout = render_advanced_settings(obj)
     assert find_by_id(layout, "dd_navigation_mode")[0].value == "linear"
     assert find_by_id(layout, "cb_keep_responses")[0].value == ["true"]
+    assert find_by_id(layout, "cb_accept_empty_as_zero")[0].value == ["true"]
+
+
+def test_advanced_settings_disabled_accept_empty_as_zero_unchecks_checkbox():
+    obj = SimpleNamespace(navigation_mode="nonlinear", keep_responses=True, accept_empty_as_zero=False)
+    layout = render_advanced_settings(obj)
+    assert find_by_id(layout, "cb_accept_empty_as_zero")[0].value == []
 
 
 def test_configuration_feedback_populates_fields():

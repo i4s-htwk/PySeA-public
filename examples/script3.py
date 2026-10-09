@@ -51,6 +51,7 @@ section_1 = test.add_section()
 task_1 = section_1.add_task("Tabelle mit Antworten aus Exceldatei")
 task_2 = section_1.add_task("Auswahlaufgabe mit Variantenabhängigen Bildern")
 task_3 = section_1.add_task("Aufgabe mit variantenabhängigen Tabellen")
+task_4 = section_1.add_task("Leere Lücke mit Korrektwert 0")
 
 ### edit tasks ###########################################################################################################################
 
@@ -62,6 +63,9 @@ excel_responses.excel_file = excel_file
 # Select the worksheet named `Varianten`.
 excel_responses.page = "Varianten"
 # Add response fields linked to cells C3, C5, and C7.
+# C3 (variant 1 of "wert 1") is deliberately 0 in Beispiel.xlsx: together
+# with `set_accept_empty_as_zero()` below this exercises the "leere Lücke
+# = 0" setting for excel_responses() specifically.
 for i in range(0,3):
     excel_responses.add_response("C"+str(2*i+3))
 
@@ -136,11 +140,24 @@ task_3.item_body(
     "Füllen Sie die Lücken in der Tabelle aus: \n"+
     vdt)
 
+# task_4: plain response with a correct value of 0, to demonstrate the
+# "leere Lücke = 0" setting (`set_accept_empty_as_zero()`) for a normal
+# response field that is known at script time (no Excel/variants involved).
+response_1 = task_4.response(0)
+response_2 = task_4.response(2)
+task_4.item_body(
+    "Normalkraft im unbelasteten Stab: "+response_1+"\n"
+    "Querkraft im belasteten Stab: " + response_2)
+
 ### set global settings #################################################################################################################
 # Access the global test settings.
 settings = test.get_settings()
 # Set the navigation mode for the test.
 settings.set_navigation_mode("test_path_control")
+# "Leere Lücke = 0" ist standardmäßig aktiv, wird hier nur explizit gesetzt,
+# um zu zeigen, dass task_1 (excel_responses) und task_4 (normale Response)
+# in diesem Script bewusst diese Einstellung testen.
+settings.set_accept_empty_as_zero(True)
 
 ### export test #########################################################################################################################
 test.create_test("...")

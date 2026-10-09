@@ -66,6 +66,19 @@ class StoreConfigurations:
         """
         self.advanced_settings.keep_responses = bool
 
+    def set_accept_empty_as_zero(self, value):
+        """Set whether an empty gap is scored as correct when its correct value is 0.
+
+        Betrifft normale Lücken (``TaskFacade.response()``), Excel-basierte
+        Lücken (``TaskFacade.excel_responses()``) und automatisch aus
+        Tabellen erzeugte Lücken (``automatic_responses``).
+        Args:
+            value: ``True`` (Standard) lässt eine leer gelassene Lücke als
+                richtig gelten, wenn ihr korrekter Wert exakt 0 ist.
+                ``False`` verlangt, dass eine "0" explizit eingetragen wird.
+        """
+        self.advanced_settings.accept_empty_as_zero = bool(value)
+
     def set_point_deduction(self, point_deduction_per_attempt, min_score_percentage):
         """Set an automatic point deduction for repeated response attempts.
         Args:

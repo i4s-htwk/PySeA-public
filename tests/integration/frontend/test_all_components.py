@@ -933,6 +933,7 @@ def test_frontend_all_controls(pysea):
     # ================================================================
 
     toggle_checkbox(pysea, "#cb_keep_responses input")
+    toggle_checkbox(pysea, "#cb_accept_empty_as_zero input")
 
     set_value(pysea, "#i_pass_score_percentage", "40")
     set_value(pysea, "#i_feedback_correct_config", "Test bestanden")

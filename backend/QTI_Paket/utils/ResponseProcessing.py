@@ -3,7 +3,7 @@ import xml.etree.ElementTree as ET
 from backend.utils import Response, ExcelResponse
 
 
-def response_processing_response(response_processing_tag, response_id, equal_attribs):
+def response_processing_response(response_processing_tag, response_id, equal_attribs, accept_empty_as_zero=False):
     response_condition = ET.SubElement(response_processing_tag, "responseCondition")
     response_if = ET.SubElement(response_condition, "responseIf")
     equal = ET.SubElement(response_if, "equal", equal_attribs)
@@ -11,6 +11,18 @@ def response_processing_response(response_processing_tag, response_id, equal_att
     ET.SubElement(equal, "correct", {"identifier": response_id})
     set_outcome_value = ET.SubElement(response_if, "setOutcomeValue", {"identifier": "SCORE_" + response_id})
     ET.SubElement(set_outcome_value, "variable", {"identifier": "MAXSCORE_" + response_id})
+
+    if accept_empty_as_zero:
+        override_condition = ET.SubElement(response_processing_tag, "responseCondition", {"class":"ONYX_EXPERT_CONDITION"})
+        override_if = ET.SubElement(override_condition, "responseIf")
+        and_tag = ET.SubElement(override_if, "and")
+        is_null = ET.SubElement(and_tag, "isNull")
+        ET.SubElement(is_null, "variable", {"identifier": response_id})
+        correct_is_zero = ET.SubElement(and_tag, "equal", {"toleranceMode": "exact"})
+        ET.SubElement(correct_is_zero, "correct", {"identifier": response_id})
+        ET.SubElement(correct_is_zero, "baseValue", {"baseType": "float"}).text = "0"
+        override_set_outcome_value = ET.SubElement(override_if, "setOutcomeValue", {"identifier": "SCORE_" + response_id})
+        ET.SubElement(override_set_outcome_value, "variable", {"identifier": "MAXSCORE_" + response_id})
 
 def response_processing_score_bounds(response_processing_tag):
     response_condition = ET.SubElement(response_processing_tag, "responseCondition")

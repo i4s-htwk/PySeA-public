@@ -83,6 +83,95 @@ class TestResponseProcessingResponse(unittest.TestCase):
 
         self.assertIsNotNone(score_variable)
 
+    def test_accept_empty_as_zero_false_adds_no_override(self):
+        root = ET.Element("responseProcessing")
+
+        response_processing_module.response_processing_response(
+            response_processing_tag=root,
+            response_id="RESPONSE_1",
+            equal_attribs={"toleranceMode": "exact"},
+            accept_empty_as_zero=False,
+        )
+
+        conditions = root.findall("responseCondition")
+
+        self.assertEqual(len(conditions), 1)
+
+    def test_accept_empty_as_zero_true_adds_second_condition(self):
+        root = ET.Element("responseProcessing")
+
+        response_processing_module.response_processing_response(
+            response_processing_tag=root,
+            response_id="RESPONSE_1",
+            equal_attribs={"toleranceMode": "exact"},
+            accept_empty_as_zero=True,
+        )
+
+        conditions = root.findall("responseCondition")
+
+        self.assertEqual(len(conditions), 2)
+
+    def test_accept_empty_as_zero_first_condition_is_unchanged(self):
+        root = ET.Element("responseProcessing")
+
+        response_processing_module.response_processing_response(
+            response_processing_tag=root,
+            response_id="RESPONSE_1",
+            equal_attribs={"toleranceMode": "exact"},
+            accept_empty_as_zero=True,
+        )
+
+        first_equal = root.find("./responseCondition[1]/responseIf/equal")
+
+        self.assertIsNotNone(first_equal)
+        self.assertEqual(first_equal.attrib["toleranceMode"], "exact")
+
+    def test_accept_empty_as_zero_override_checks_null_and_zero(self):
+        root = ET.Element("responseProcessing")
+
+        response_processing_module.response_processing_response(
+            response_processing_tag=root,
+            response_id="RESPONSE_1",
+            equal_attribs={"toleranceMode": "exact"},
+            accept_empty_as_zero=True,
+        )
+
+        is_null = root.find(
+            "./responseCondition[2]/responseIf/and/isNull/"
+            "variable[@identifier='RESPONSE_1']"
+        )
+        correct_is_zero = root.find(
+            "./responseCondition[2]/responseIf/and/equal/"
+            "correct[@identifier='RESPONSE_1']"
+        )
+        zero_value = root.find(
+            "./responseCondition[2]/responseIf/and/equal/"
+            "baseValue[@baseType='float']"
+        )
+
+        self.assertIsNotNone(is_null)
+        self.assertIsNotNone(correct_is_zero)
+        self.assertIsNotNone(zero_value)
+        self.assertEqual(zero_value.text, "0")
+
+    def test_accept_empty_as_zero_override_sets_full_score(self):
+        root = ET.Element("responseProcessing")
+
+        response_processing_module.response_processing_response(
+            response_processing_tag=root,
+            response_id="RESPONSE_1",
+            equal_attribs={"toleranceMode": "exact"},
+            accept_empty_as_zero=True,
+        )
+
+        score_variable = root.find(
+            "./responseCondition[2]/responseIf/"
+            "setOutcomeValue[@identifier='SCORE_RESPONSE_1']/"
+            "variable[@identifier='MAXSCORE_RESPONSE_1']"
+        )
+
+        self.assertIsNotNone(score_variable)
+
 
 class TestResponseProcessingScoreBounds(unittest.TestCase):
 
