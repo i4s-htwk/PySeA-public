@@ -1,5 +1,29 @@
 import numbers
 import os
+import re
+import unicodedata
+
+_INVALID_XML_CHAR_RE = re.compile(
+    "[\x00-\x08\x0b\x0c\x0e-\x1f\ud800-\udfff\ufffe\uffff]")
+_C0_CONTROL_NAMES = [
+    "NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL",
+    "BS", "TAB", "LF", "VT", "FF", "CR", "SO", "SI",
+    "DLE", "DC1", "DC2", "DC3", "DC4", "NAK", "SYN", "ETB",
+    "CAN", "EM", "SUB", "ESC", "FS", "GS", "RS", "US"]
+
+def describe_codepoint(codepoint):
+    if 0 <= codepoint < len(_C0_CONTROL_NAMES):
+        return _C0_CONTROL_NAMES[codepoint]
+    try:
+        return unicodedata.name(chr(codepoint))
+    except ValueError:
+        return "UNBEKANNT"
+
+def find_invalid_xml_characters(text):
+    """Liefert [(index, codepoint), ...] für alle laut XML 1.0 unzulässigen Zeichen in text."""
+    if not text:
+        return []
+    return [(match.start(), ord(match.group())) for match in _INVALID_XML_CHAR_RE.finditer(text)]
 
 class PySeAError(Exception):
     pass
@@ -36,6 +60,7 @@ class TestValidator:
         self.validate_variant_dependent_tables_require_test_path_control()
         self.validate_variant_dependent_tables()
         self.validate_variant_dependent_images()
+        self.validate_no_invalid_xml_characters()
         self.validate_item_bodies()
         self.validate_tasks_have_answer_interaction()
         self.validate_response_values_are_numeric()
@@ -190,6 +215,73 @@ class TestValidator:
                 if task.id not in self.item_body.items:
                     raise PySeAConsistencyError(
                         f"Für Task {task.id!r} fehlt ein item_body-Eintrag.")
+
+    def validate_no_invalid_xml_characters(self):
+        self._check_text_field(self.configurations.title, "Der Test-Titel")
+
+        test_feedback = self.configurations.feedback or {}
+        if test_feedback.get("feedback_correct"):
+            self._check_text_field(
+                test_feedback["feedback_correct"].value, "Das Test-Feedback (richtig)")
+        if test_feedback.get("feedback_incorrect"):
+            self._check_text_field(
+                test_feedback["feedback_incorrect"].value, "Das Test-Feedback (falsch)")
+
+        for section in self.test_structure.list:
+            self._check_text_field(section.title, f"Der Titel von Section {section.id!r}")
+
+            for task in section.list_tasks:
+                self._check_text_field(task.title, f"Der Titel von Task {task.id!r}")
+
+                identifier = task.parent_id or task.id
+
+                self._check_text_field(
+                    self.item_body.get_item(identifier), f"Der Aufgabentext von Task {task.id!r}")
+
+                feedback = self.feedback.get_item(identifier)
+                if feedback:
+                    feedback_correct = feedback.get("feedback_correct")
+                    if feedback_correct:
+                        self._check_text_field(
+                            feedback_correct.value, f"Das Feedback (richtig) von Task {task.id!r}")
+
+                    for feedback_incorrect in feedback.get("feedback_incorrect", []):
+                        self._check_text_field(
+                            feedback_incorrect.value, f"Ein Feedback (falsch) von Task {task.id!r}")
+
+                selection = self.selections.get_selection(identifier)
+                if selection:
+                    for option in list(selection.correct) + list(selection.incorrect):
+                        self._check_text_field(option, f"Eine Antwortoption von Task {task.id!r}")
+
+                matching = self.matchings.get_matching(identifier)
+                if matching:
+                    for choice in matching.source_choices + matching.target_choices:
+                        self._check_text_field(choice.text, f"Ein Matching-Text von Task {task.id!r}")
+
+    def _check_text_field(self, text, context):
+        if not isinstance(text, str):
+            return
+
+        invalid_chars = find_invalid_xml_characters(text)
+        if not invalid_chars:
+            return
+
+        index, codepoint = invalid_chars[0]
+        name = describe_codepoint(codepoint)
+
+        hint = ""
+        if codepoint < 0x20:
+            hint = (
+                " Vermutliche Ursache: eine von Python interpretierte Escape-Sequenz "
+                "statt LaTeX, z. B. \"\\alpha\" statt \"\\\\alpha\" im Skript "
+                "(ebenso betroffen: \\b, \\f, \\v, \\x.., \\0)."
+            )
+
+        raise PySeAValueError(
+            f"{context} enthält an Position {index} das ungültige Steuerzeichen "
+            f"U+{codepoint:04X} ({name}) \n {hint}"
+        )
 
     def _is_automatic_excel_table_or_area(self, task_id, referenced_id):
         tables_entry = self.tables.items.get(task_id)
