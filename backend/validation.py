@@ -58,6 +58,7 @@ class TestValidator:
         self.validate_unique_ids()
         self.validate_variant_assignment()
         self.validate_variant_dependent_tables_require_test_path_control()
+        self.validate_test_feedback_does_not_use_maxscore_in_test_path_control()
         self.validate_variant_dependent_tables()
         self.validate_variant_dependent_images()
         self.validate_no_invalid_xml_characters()
@@ -139,6 +140,25 @@ class TestValidator:
 
         if navigation_mode != "test_path_control":
             raise PySeAConsistencyError("Variantenabhängige Tabellen benötigen navigation_mode='test_path_control'. " f"Aktuell gesetzt: {navigation_mode!r}.")
+
+    def validate_test_feedback_does_not_use_maxscore_in_test_path_control(self):
+        if self.configurations.advanced_settings.navigation_mode != "test_path_control":
+            return
+
+        feedback_labels = {
+            "feedback_correct": "Das Test-Feedback bei Bestehen",
+            "feedback_incorrect": "Das Test-Feedback bei Nicht-Bestehen",
+        }
+
+        for key, label in feedback_labels.items():
+            feedback = self.configurations.feedback.get(key)
+
+            if feedback and isinstance(feedback.value, str) and "{MAXSCORE}" in feedback.value:
+                raise PySeAConsistencyError(
+                    f"{label} enthält den Platzhalter '{{MAXSCORE}}'. Im Navigationsmodus "
+                    "'test_path_control' stellt OPAL die Variable MAXSCORE nicht zur Verfügung. "
+                    "Trage die maximale Punktzahl stattdessen direkt als Zahl in den Feedback-Text ein."
+                )
 
     def validate_variant_dependent_tables(self):
         available_table_references_by_task = {}
