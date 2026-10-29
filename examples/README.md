@@ -1234,10 +1234,10 @@ Bei False werden bereits eingegebene Antworten bei einem neuen Antwortversuch ni
 
 ## 7.9 Leere Lücke als richtig werten, wenn Korrektwert 0 ist
 
-Bei manchen Aufgaben (z. B. Schnittkraftverläufen) ist der korrekte Wert einer Lücke `0`. Standardmäßig wertet PySeA eine leer gelassene Lücke in diesem Fall als richtig:
+Bei manchen Aufgaben (z. B. Schnittkraftverläufen) ist der korrekte Wert einer Lücke `0`. Standardmäßig ist die Einstellung deaktiviert, d. h. eine leer gelassene Lücke wird immer als falsch gewertet und eine `0` muss explizit eingetragen werden. Soll eine leer gelassene Lücke in diesem Fall als richtig gewertet werden, muss die Einstellung explizit aktiviert werden:
 
 ```python
-settings.set_accept_empty_as_zero(True)   # Standardwert, muss nicht explizit gesetzt werden
+settings.set_accept_empty_as_zero(True)
 ```
 
 Die Einstellung gilt für den ganzen Test (nicht pro Aufgabe oder Lücke) und betrifft:
@@ -1245,14 +1245,6 @@ Die Einstellung gilt für den ganzen Test (nicht pro Aufgabe oder Lücke) und be
 - normale Lücken (`task.response(0)`),
 - automatisch aus Tabellen erzeugte Lücken (`automatic_responses`),
 - Lücken aus Exceldateien (`task.excel_responses()`).
-
-Soll stattdessen immer eine explizite `0` verlangt werden, muss die Einstellung deaktiviert werden:
-
-```python
-settings.set_accept_empty_as_zero(False)
-```
-
-Bei `False` wird eine leer gelassene Lücke immer als falsch gewertet, unabhängig vom korrekten Wert.
 
 ---
 

@@ -73,9 +73,10 @@ class StoreConfigurations:
         Lücken (``TaskFacade.excel_responses()``) und automatisch aus
         Tabellen erzeugte Lücken (``automatic_responses``).
         Args:
-            value: ``True`` (Standard) lässt eine leer gelassene Lücke als
-                richtig gelten, wenn ihr korrekter Wert exakt 0 ist.
-                ``False`` verlangt, dass eine "0" explizit eingetragen wird.
+            value: ``True`` lässt eine leer gelassene Lücke als richtig
+                gelten, wenn ihr korrekter Wert exakt 0 ist.
+                ``False`` (Standard) verlangt, dass eine "0" explizit
+                eingetragen wird.
         """
         self.advanced_settings.accept_empty_as_zero = bool(value)
 

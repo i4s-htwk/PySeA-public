@@ -154,9 +154,9 @@ task_4.item_body(
 settings = test.get_settings()
 # Set the navigation mode for the test.
 settings.set_navigation_mode("test_path_control")
-# "Leere Lücke = 0" ist standardmäßig aktiv, wird hier nur explizit gesetzt,
-# um zu zeigen, dass task_1 (excel_responses) und task_4 (normale Response)
-# in diesem Script bewusst diese Einstellung testen.
+# "Leere Lücke = 0" ist standardmäßig deaktiviert und wird hier explizit
+# aktiviert, damit task_1 (excel_responses) und task_4 (normale Response)
+# in diesem Script diese Einstellung testen.
 settings.set_accept_empty_as_zero(True)
 
 ### export test #########################################################################################################################
