@@ -1,3 +1,10 @@
+def _to_str(value):
+    """Accepts numbers as well as strings, since the XML export only serializes strings."""
+    if isinstance(value, float) and value.is_integer():
+        value = int(value)
+    return str(value).strip()
+
+
 class Image:
     """A single image loaded into the test.
 
@@ -19,10 +26,12 @@ class Image:
         The height is recalculated automatically so the original aspect
         ratio is preserved.
         Args:
-            width: The new width, in pixels, as a string (e.g. ``"400"``).
+            width: The new width, in pixels (e.g. ``"400"`` or ``400``).
         """
+        width = _to_str(width)
         self.width = width
         if width not in ("", "0"):
+            self._check_ratio()
             self.height = str(float(self.ratio) * float(self.width))
 
     def set_height(self, height):
@@ -31,11 +40,20 @@ class Image:
         The width is recalculated automatically so the original aspect
         ratio is preserved.
         Args:
-            height: The new height, in pixels, as a string.
+            height: The new height, in pixels (e.g. ``"300"`` or ``300``).
         """
+        height = _to_str(height)
         self.height = height
         if height not in ("", "0"):
+            self._check_ratio()
             self.width = str(float(self.height)/ float(self.ratio))
+
+    def _check_ratio(self):
+        if float(self.ratio or 0) <= 0:
+            raise ValueError(
+                f"Seitenverhältnis von '{self.href}' unbekannt: Die Bildmaße konnten nicht ermittelt werden "
+                f"(bei SVG: width/height oder viewBox im <svg>-Tag fehlen). "
+                f"Bitte image.width und image.height direkt setzen.")
 
     def to_dict(self):
         return {

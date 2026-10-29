@@ -1,8 +1,66 @@
 import os
 import shutil
+import re
+import xml.etree.ElementTree as ET
 from PIL import Image as Img
 
 from backend.utils import Image
+
+# Umrechnungsfaktoren absoluter SVG-Längeneinheiten in px (CSS: 96 px pro Zoll)
+_SVG_EINHEITEN = {"": 1.0, "px": 1.0, "pt": 4 / 3, "pc": 16.0, "in": 96.0, "cm": 96 / 2.54, "mm": 96 / 25.4}
+
+
+def _svg_laenge(wert):
+    """Wandelt eine SVG-Längenangabe (z. B. ``"123.4pt"``) in px um.
+    Gibt ``None`` zurück bei fehlender, relativer (``%``, ``em``) oder ungültiger Angabe."""
+    if not wert:
+        return None
+    m = re.fullmatch(r"\s*([+-]?(?:\d+\.?\d*|\.\d+)(?:[eE][+-]?\d+)?)\s*([a-zA-Z%]*)\s*", wert)
+    if not m or m.group(2).lower() not in _SVG_EINHEITEN:
+        return None
+    laenge = float(m.group(1)) * _SVG_EINHEITEN[m.group(2).lower()]
+    return laenge if laenge > 0 else None
+
+
+def _svg_masse(pfad):
+    """Liest Breite und Höhe (in px) aus dem ``<svg>``-Wurzelelement.
+    Nutzt ``width``/``height``, fehlende Werte werden über die ``viewBox`` ergänzt.
+    Gibt ``(0, 0)`` zurück, wenn sich keine Maße bestimmen lassen."""
+    try:
+        _, wurzel = next(ET.iterparse(pfad, events=("start",)))
+    except (ET.ParseError, StopIteration, OSError):
+        return 0, 0
+
+    breite = _svg_laenge(wurzel.get("width"))
+    hoehe = _svg_laenge(wurzel.get("height"))
+
+    vb_breite = vb_hoehe = None
+    viewbox = wurzel.get("viewBox")
+    if viewbox:
+        teile = re.split(r"[\s,]+", viewbox.strip())
+        try:
+            if len(teile) == 4 and float(teile[2]) > 0 and float(teile[3]) > 0:
+                vb_breite, vb_hoehe = float(teile[2]), float(teile[3])
+        except ValueError:
+            pass
+
+    if breite and hoehe:
+        return breite, hoehe
+    if vb_breite:
+        if breite:
+            return breite, breite * vb_hoehe / vb_breite
+        if hoehe:
+            return hoehe * vb_breite / vb_hoehe, hoehe
+        return vb_breite, vb_hoehe
+    return 0, 0
+
+
+def _bildmasse(pfad):
+    """Gibt ``(breite, hoehe)`` einer Bilddatei in px zurück (SVG oder Rastergrafik)."""
+    if pfad.lower().endswith(".svg"):
+        return _svg_masse(pfad)
+    with Img.open(pfad) as img:
+        return img.size
 
 class StoreImages:
     """Manages the images loaded into a test.
@@ -46,11 +104,7 @@ class StoreImages:
                     ziel = os.path.join("assets", fname)
                     shutil.copy2(quelle, ziel)
 
-                    img_breite, img_hoehe = 0, 0
-                    if not fname.lower().endswith(".svg"):
-                        with Img.open(ziel) as img:
-                            img_breite, img_hoehe = img.size
-
+                    img_breite, img_hoehe = _bildmasse(ziel)
                     verhaeltnis = img_hoehe / img_breite if img_breite else 0
                     self.images.append(
                         Image(str(fname), f"BILD_{i + 1}", str(img_breite), str(img_hoehe), str(verhaeltnis)))
@@ -69,11 +123,7 @@ class StoreImages:
                     ziel = os.path.join("assets", fname)
                     shutil.copy2(quelle, ziel)
 
-                    img_breite, img_hoehe = 0, 0
-                    if not fname.lower().endswith(".svg"):
-                        with Img.open(ziel) as img:
-                            img_breite, img_hoehe = img.size
-
+                    img_breite, img_hoehe = _bildmasse(ziel)
                     verhaeltnis = img_hoehe / img_breite if img_breite else 0
                     self.images.append(
                         Image(str(fname), f"BILD_{i + 1}", str(img_breite), str(img_hoehe), str(verhaeltnis)))
